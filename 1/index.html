@@ -101,10 +101,10 @@
       
       var displayCode = function () {
         var code = `
-        import requests\n
-        headers = {'Accept': 'application/json'}\n
-        r = requests.get('https://www.gemeinderat-zuerich.ch/api/Mitglieder/parameter', headers=headers)\n
-        params = r.json()\n
+        import requests
+        headers = {'Accept': 'application/json'}
+        r = requests.get('https://www.gemeinderat-zuerich.ch/api/Mitglieder/parameter', headers=headers)
+        params = r.json()
         `;
         html = "<pre><code>" + hljs.highlightAuto(code).value + "</code></pre>";
         chatWindow.talk(
