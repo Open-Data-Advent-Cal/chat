@@ -76,7 +76,7 @@
 
       // this function is called when user asks for banana
       var callRisApi = function () {
-        request
+        superagent
           .get('https://www.gemeinderat-zuerich.ch/api/Mitglieder/parameter')
           .then(res => {
             html = "<pre><code>" + hljs.highlightAuto(res.body).value + "</code></pre>";
