@@ -77,11 +77,14 @@
       };
       
       var displayCode = function () {
-        html = hljs.highlightAuto('<h1>Hello World!</h1>').value
+        var code = `<div>
+          <span>Some HTML here</span>
+        </div>
+        `;
+        html = hljs.highlightAuto(code).value
         chatWindow.talk(
           {talk: { says: [html], reply: [
             {
-              question: "",
               answer: "again",
             },
           ],}},
