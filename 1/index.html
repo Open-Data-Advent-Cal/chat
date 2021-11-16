@@ -83,7 +83,7 @@
           .get('https://www.gemeinderat-zuerich.ch/api/Mitglieder/parameter')
           .set('Accept', 'application/json')
           .then(res => {
-            var html = "<pre><code>" + hljs.highlightAuto(res.text).value + "</code></pre>";
+            var html = "<pre><code>" + hljs.highlightAuto(JSON.stringify(res.body.Parteien)).value + "</code></pre>";
             chatWindow.talk(
               {
                 query: { 
@@ -99,6 +99,7 @@
               "query"
             );
             console.log(res.body, res.headers, res.status);
+            console.log(JSON.stringify(res.body.Parteien));
             console.log(html);
           })
           .catch(err => {
@@ -113,12 +114,13 @@ headers = {'Accept': 'application/json'}
 base_url = 'https://www.gemeinderat-zuerich.ch/api/'
 param_url = f'{base_url}/Mitglieder/parameter'
 r = requests.get(url, headers=headers)
-params = r.json()`;
+params = r.json()
+print(params['Parteien'])`;
         var html = "<pre><code>" + hljs.highlightAuto(code).value + "</code></pre>";
         chatWindow.talk(
           {
             code: { 
-              says: ["Hier ist ein Python-Beispiel mit <code>requests</code>:", html],
+              says: ["Hier ist ein Python-Beispiel mit <code>requests</code> für eine Liste aller Parteien:", html],
               reply: [
                 {
                   question: "Möchtest du nochmals?",
