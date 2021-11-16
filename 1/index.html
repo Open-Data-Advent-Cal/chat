@@ -77,14 +77,17 @@
       };
       
       var displayCode = function () {
-        var code = `<div>
-          <span>Some HTML here</span>
-        </div>
+        var code = `
+        import requests
+        headers = {'Accept': 'application/json'}
+        r = requests.get('https://www.gemeinderat-zuerich.ch/api/Mitglieder/parameter', headers=headers)
+        params = r.json()
         `;
         html = hljs.highlightAuto(code).value
         chatWindow.talk(
           {talk: { says: [html], reply: [
             {
+              question: "Merci für das Python-Beispiel",
               answer: "again",
             },
           ],}},
