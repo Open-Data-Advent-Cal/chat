@@ -11,6 +11,9 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.3.1/styles/default.min.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.3.1/highlight.min.js"></script>
 
+    <!-- superagent -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/superagent/4.1.0/superagent.min.js" integrity="sha512-LJaxxgpiq7SihGQ21nejROsll6FRrgbs0Wxtgqb5x+Q0CJICA3vt8hlBxSD8NLsO+Yabgg3B7ARexiijKiojGg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
     <!-- stylesheets are conveniently separated into components -->
     <link rel="stylesheet" media="all" href="../component/styles/setup.css" />
     <link rel="stylesheet" media="all" href="../component/styles/says.css" />
@@ -73,6 +76,26 @@
 
       // this function is called when user asks for banana
       var callRisApi = function () {
+        request
+          .get('https://www.gemeinderat-zuerich.ch/api/Mitglieder/parameter')
+          .then(res => {
+            html = hljs.highlightAuto(res.body).value
+            chatWindow.talk(
+              {talk: { says: [html], reply: [
+                {
+                  question: "😎",
+                  answer: "again",
+                },
+               ],
+              }
+             },
+             "talk"
+            );
+            console.log(res.body, res.headers, res.status);
+          })
+          .catch(err => {
+            console.log("ERROR:", err.message, err.response);
+          });
         chatWindow.talk(convo, "again");
       };
       
