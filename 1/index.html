@@ -79,7 +79,7 @@
         request
           .get('https://www.gemeinderat-zuerich.ch/api/Mitglieder/parameter')
           .then(res => {
-            html = hljs.highlightAuto(res.body).value
+            html = "<pre><code>" + hljs.highlightAuto(res.body).value + "</code></pre>";
             chatWindow.talk(
               {talk: { says: [html], reply: [
                 {
@@ -106,7 +106,7 @@
         r = requests.get('https://www.gemeinderat-zuerich.ch/api/Mitglieder/parameter', headers=headers)\n
         params = r.json()\n
         `;
-        html = hljs.highlightAuto(code).value
+        html = "<pre><code>" + hljs.highlightAuto(code).value + "</code></pre>";
         chatWindow.talk(
           {talk: { says: [html], reply: [
             {
