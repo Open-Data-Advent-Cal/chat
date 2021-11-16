@@ -86,7 +86,7 @@
             var html = "<pre><code>" + hljs.highlightAuto(res.text).value + "</code></pre>";
             chatWindow.talk(
               {
-                talk: { 
+                query: { 
                   says: ["Hier ist die JSON Antwort vom API:", html], 
                   reply: [
                     {
@@ -96,7 +96,7 @@
                   ],
                 }
               },
-              "talk"
+              "query"
             );
             console.log(res.body, res.headers, res.status);
             console.log(html);
@@ -114,10 +114,10 @@ base_url = 'https://www.gemeinderat-zuerich.ch/api/'
 param_url = f'{base_url}/Mitglieder/parameter'
 r = requests.get(url, headers=headers)
 params = r.json()`;
-        html = "<pre><code>" + hljs.highlightAuto(code).value + "</code></pre>";
+        var html = "<pre><code>" + hljs.highlightAuto(code).value + "</code></pre>";
         chatWindow.talk(
           {
-            talk: { 
+            code: { 
               says: ["Hier ist ein Python-Beispiel mit <code>requests</code>:", html],
               reply: [
                 {
@@ -127,7 +127,7 @@ params = r.json()`;
               ]
             }
           },
-          "talk"
+          "code"
         );
       };
 
