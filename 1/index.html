@@ -118,7 +118,8 @@
         var code = `
 import requests
 headers = {'Accept': 'application/json'}
-url = 'https://www.gemeinderat-zuerich.ch/api/Mitglieder/parameter'
+base_url = 'https://www.gemeinderat-zuerich.ch/api/'
+param_url = f'{base_url}/Mitglieder/parameter'
 r = requests.get(url, headers=headers)
 params = r.json()
         `;
