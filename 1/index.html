@@ -78,6 +78,7 @@
       var callRisApi = function () {
         superagent
           .get('https://www.gemeinderat-zuerich.ch/api/Mitglieder/parameter')
+          .set('Accept', 'application/json')
           .then(res => {
             html = "<pre><code>" + hljs.highlightAuto(res.body).value + "</code></pre>";
             chatWindow.talk(
@@ -109,7 +110,7 @@
         `;
         html = "<pre><code>" + hljs.highlightAuto(code).value + "</code></pre>";
         chatWindow.talk(
-          {talk: { says: [html], reply: [
+          {talk: { says: ["Hier ist ein Python-Beispiel mit <pre>requests</pre>:", html], reply: [
             {
               question: "Möchtest du nochmals?",
               answer: "ice",
