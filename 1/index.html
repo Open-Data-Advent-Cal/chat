@@ -103,7 +103,8 @@
         var code = `
         import requests
         headers = {'Accept': 'application/json'}
-        r = requests.get('https://www.gemeinderat-zuerich.ch/api/Mitglieder/parameter', headers=headers)
+        url = 'https://www.gemeinderat-zuerich.ch/api/Mitglieder/parameter'
+        r = requests.get(url, headers=headers)
         params = r.json()
         `;
         html = "<pre><code>" + hljs.highlightAuto(code).value + "</code></pre>";
@@ -116,7 +117,6 @@
           ],}},
           "talk"
         );
-        //chatWindow.talk(convo, "again");
       };
 
       // pass JSON to your function and you're done!
