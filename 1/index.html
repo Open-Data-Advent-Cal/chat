@@ -82,20 +82,23 @@
           .then(res => {
             html = "<pre><code>" + hljs.highlightAuto(res.body).value + "</code></pre>";
             chatWindow.talk(
-              {talk: { says: [html], reply: [
-                {
-                  question: "Möchtest du nochmals?",
-                  answer: "ice",
-                },
-               ],
-              }
-             },
-             "talk"
+              {
+                talk: { 
+                  says: [html], 
+                  reply: [
+                    {
+                      question: "Möchtest du nochmals?",
+                      answer: "ice",
+                    },
+                  ],
+                }
+              },
+              "talk"
             );
             console.log(res.body, res.headers, res.status);
           })
           .catch(err => {
-            console.log("ERROR:", err.message, err.response);
+            console.log("ERROR:", err);
           });
         chatWindow.talk(convo, "again");
       };
@@ -110,12 +113,17 @@
         `;
         html = "<pre><code>" + hljs.highlightAuto(code).value + "</code></pre>";
         chatWindow.talk(
-          {talk: { says: ["Hier ist ein Python-Beispiel mit <code>requests</code>:", html], reply: [
-            {
-              question: "Möchtest du nochmals?",
-              answer: "ice",
-            },
-          ],}},
+          {
+            talk: { 
+              says: ["Hier ist ein Python-Beispiel mit <code>requests</code>:", html],
+              reply: [
+                {
+                  question: "Möchtest du nochmals?",
+                  answer: "ice",
+                }
+              ]
+            }
+          },
           "talk"
         );
       };
