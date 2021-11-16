@@ -79,10 +79,15 @@
       var displayCode = function () {
         html = hljs.highlightAuto('<h1>Hello World!</h1>').value
         chatWindow.talk(
-          {talk: { says: [html], reply: []}},
+          {talk: { says: [html], reply: [
+            {
+              question: "",
+              answer: "again",
+            },
+          ],}},
           "talk"
         );
-        chatWindow.talk(convo, "again");
+        //chatWindow.talk(convo, "again");
       };
 
       // pass JSON to your function and you're done!
