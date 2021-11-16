@@ -6,6 +6,10 @@
 
     <!-- for mobile screens -->
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    
+    <!--- highlights.js -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.3.1/styles/default.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.3.1/highlight.min.js"></script>
 
     <!-- stylesheets are conveniently separated into components -->
     <link rel="stylesheet" media="all" href="../component/styles/setup.css" />
@@ -44,29 +48,23 @@
       // ...allows running your scripts on-demand
       var convo = {
         ice: {
-          says: ["Hi", "Would you like banana or ice cream?"],
+          says: ["Hallo", "Heute möchte ich dir das API des Ratsinformationssystems (RIS-API) der Stadt Zürich zeigen.", "Möchtest du das API abfragen oder lieber den Code sehen für die Abfrage?"],
           reply: [
             {
-              question: "Banana",
-
-              // instead of the key name for conversation block you can simply pass
-              // a name of the function you want to call
-              // it can not accept any parameters at this moment;
-              // this function has to be declared on this very document page
-              // this is for security;
-              answer: "bananaFunction",
+              question: "API abfragen",
+              answer: "callRisApi",
             },
             {
-              question: "Ice Cream",
-              answer: "ice-cream",
+              question: "Code sehen",
+              answer: "displayCode",
             },
           ],
         },
-        "ice-cream": {
-          says: ["🍦"],
+        "again": {
+          says: ["Möchtest du nochmals?"],
           reply: [
             {
-              question: "Start Over",
+              question: "Ja, nochmals!",
               answer: "ice",
             },
           ],
@@ -74,9 +72,17 @@
       };
 
       // this function is called when user asks for banana
-      var bananaFunction = function () {
-        alert("🍌");
-        chatWindow.talk(convo, "ice"); // the conversation can be easily restarted from here.
+      var callRisApi = function () {
+        chatWindow.talk(convo, "again");
+      };
+      
+      var displayCode = function () {
+        html = hljs.highlightAuto('<h1>Hello World!</h1>').value
+        chatWindow.talk(
+          {talk: { says: [html], reply: []}},
+          "talk"
+        );
+        chatWindow.talk(convo, "again");
       };
 
       // pass JSON to your function and you're done!
