@@ -10,17 +10,6 @@
     <!--- highlights.js -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.3.1/styles/default.min.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.3.1/highlight.min.js"></script>
-    <script>
-      var brPlugin = {
-        "before:highlightBlock": ({ block }) => {
-          block.innerHTML = block.innerHTML.replace(/\n/g, '').replace(/<br[ /]*>/g, '\n');
-        },
-        "after:highlightBlock": ({ result }) => {
-          result.value = result.value.replace(/\n/g, "<br>");
-        }
-      };
-      hljs.addPlugin(brPlugin);
-    </script>
 
     <!-- superagent -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/superagent/4.1.0/superagent.min.js" integrity="sha512-LJaxxgpiq7SihGQ21nejROsll6FRrgbs0Wxtgqb5x+Q0CJICA3vt8hlBxSD8NLsO+Yabgg3B7ARexiijKiojGg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
@@ -94,11 +83,11 @@
           .get('https://www.gemeinderat-zuerich.ch/api/Mitglieder/parameter')
           .set('Accept', 'application/json')
           .then(res => {
-            html = "<pre><code>" + hljs.highlightAuto(res.text).value + "</code></pre>";
+            var html = "<pre><code>" + hljs.highlightAuto(res.text).value + "</code></pre>";
             chatWindow.talk(
               {
                 talk: { 
-                  says: [html], 
+                  says: ["Hier ist die JSON Antwort vom API:", html], 
                   reply: [
                     {
                       question: "Möchtest du nochmals?",
@@ -110,6 +99,7 @@
               "talk"
             );
             console.log(res.body, res.headers, res.status);
+            console.log(html);
           })
           .catch(err => {
             console.log("ERROR:", err);
